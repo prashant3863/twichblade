@@ -1,4 +1,5 @@
 module TwichBlade
 end
 
-require "twichblade/db_connection"
+require "twichblade/database_connection"
+require "twichblade/signup"
