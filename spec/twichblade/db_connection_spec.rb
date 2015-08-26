@@ -5,7 +5,7 @@ module TwichBlade
     it "should check if the connection is established with the database" do
       dbname = "twichblade_spec"
       environment = "testing"
-      dbconnection = DatabaseConnection.new(dbname, environment)
+      dbconnection = DatabaseConnection.new(dbname)
       expect(dbconnection.connect).to be_a(PG::Connection)
     end
   end

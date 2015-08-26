@@ -1,8 +1,7 @@
 module TwichBlade
   class DatabaseConnection
-    def initialize(dbname, environment)
+    def initialize(dbname)
       @dbname = dbname
-      @environment = environment
     end
 
     def connect
