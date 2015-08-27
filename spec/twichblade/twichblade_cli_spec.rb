@@ -4,16 +4,6 @@ module TwichBlade
   describe "TwichBladeCli" do
     let(:cli) { TwichBladeCli.new }
 
-    context "prompt for credential" do
-      it "asks for username" do
-        expect{ cli.get_username }.to output(/username:/).to_stdout
-      end
-
-      it "ask for password" do
-        expect{ cli.get_password }.to output(/password:/).to_stdout
-      end
-    end
-
     context "store credential" do
       it "stores the username" do 
         allow(Kernel).to receive(:gets).and_return("prashant")
@@ -29,6 +19,16 @@ module TwichBlade
     context "display" do
       it "displays the first page" do
         expect{ cli.first_display }.to output(/1. Signup\n2. Login/).to_stdout
+      end
+    end
+
+    context "prompt for credential" do
+      it "asks for username" do
+        expect{ cli.prompt_for_username }.to output(/username:/).to_stdout
+      end
+
+      it "ask for password" do
+        expect{ cli.prompt_for_password }.to output(/password:/).to_stdout
       end
     end
   end
