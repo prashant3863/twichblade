@@ -20,6 +20,11 @@ module TwichBlade
       it "displays the first page" do
         expect{ cli.first_display }.to output(/1. Signup\n2. Login/).to_stdout
       end
+
+      it "takes the desired option" do
+        allow(Kernel).to receive(:gets).and_return("1")
+        expect(cli.first_display).to eq("1")
+      end
     end
 
     context "prompt for credential" do
