@@ -7,16 +7,6 @@ module TwichBlade
     after (:each) { @dbconnection.exec("delete from user_info") }
     let(:user_1) {User.new("prashant", "foobar", @dbconnection)}
     let(:user_2) {User.new("prashant2", "foobar2", @dbconnection)}
-    
-    context "availability" do
-      it "existing username is not availabe for signup" do
-        expect(user_1.available?).to eq(false)
-      end
-
-      it "non-existing username is available for signup" do
-        expect(user_2.available?).to eq(true)
-      end
-    end
 
     context "signup" do
       it "should register a user for available username" do
