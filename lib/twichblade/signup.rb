@@ -1,5 +1,5 @@
 module TwichBlade
-  class Signup
+  class User
     def initialize(username, password, dbconnection)
       @username = username
       @password = password

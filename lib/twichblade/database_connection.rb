@@ -3,11 +3,8 @@ module TwichBlade
   attr_reader :connection
 
     def initialize(dbname)
-      @dbname = dbname
-    end
-
-    def connect
-      @connection = PG.connect(:dbname => @dbname)
+      @connection = PG.connect(:dbname => dbname)
+      @connection
     end
   end
 end
