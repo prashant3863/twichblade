@@ -13,6 +13,13 @@ module TwichBlade
         expect{ cli.get_password }.to output(/password:/).to_stdout
       end
     end
+
+    context "store credential" do
+      it "stores the username" do 
+        allow(Kernel).to receive(:gets).and_return("prashant")
+        expect(cli.get_username).to eq("prashant")
+      end
+    end
   end
 end
 

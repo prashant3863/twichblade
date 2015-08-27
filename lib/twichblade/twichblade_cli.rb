@@ -3,6 +3,7 @@ module TwichBlade
 
     def get_username
       puts "username: "
+      username = Kernel.gets.chomp
     end
 
     def get_password
