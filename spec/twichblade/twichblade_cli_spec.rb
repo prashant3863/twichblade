@@ -25,6 +25,12 @@ module TwichBlade
         expect(cli.get_password).to eq("foobar")
       end
     end
+
+    context "display" do
+      it "displays the first page" do
+        expect{ cli.first_display }.to output(/1. Signup\n2. Login/).to_stdout
+      end
+    end
   end
 end
 
