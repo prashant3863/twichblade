@@ -14,6 +14,8 @@ module TwichBlade
     def signup
       if available?
         @dbconnection.exec("insert into user_info (username, password) values ('#{@username}', '#{@password}')")
+      else
+        "Username not available"
       end
     end
   end
