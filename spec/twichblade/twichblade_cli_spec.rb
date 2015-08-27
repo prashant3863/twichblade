@@ -19,6 +19,11 @@ module TwichBlade
         allow(Kernel).to receive(:gets).and_return("prashant")
         expect(cli.get_username).to eq("prashant")
       end
+
+      it "stores the password" do 
+        allow(Kernel).to receive(:gets).and_return("foobar")
+        expect(cli.get_password).to eq("foobar")
+      end
     end
   end
 end

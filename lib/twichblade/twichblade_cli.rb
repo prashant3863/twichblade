@@ -8,6 +8,7 @@ module TwichBlade
 
     def get_password
       puts "password: "
+      password = Kernel.gets.chomp
     end
   end
 end
