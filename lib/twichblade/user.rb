@@ -11,8 +11,9 @@ module TwichBlade
       available = true if result.ntuples == 0 
       if available
         @dbconnection.exec("insert into user_info (username, password) values ('#{@username}', '#{@password}')")
+        puts "Signup sucessfull"
       else
-        "Username not available"
+        puts "Username not available"
       end
     end
   end

@@ -10,13 +10,11 @@ module TwichBlade
 
     context "signup" do
       it "should register a user for available username" do
-        user_2.signup
-        result = @dbconnection.exec("select * from user_info where username = 'prashant2'")
-        expect(result.ntuples).to eq(1) 
+        expect{ user_2.signup }.to output(/Signup sucessfull/).to_stdout 
       end
 
       it "should not register a user for already existing username" do
-        expect(user_1.signup).to eq("Username not available")
+        expect{ user_1.signup }.to output(/Username not available/).to_stdout
       end
     end
   end
