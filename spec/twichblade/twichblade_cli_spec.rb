@@ -19,6 +19,10 @@ module TwichBlade
       expect{ cli.welcome_message }.to output(/Welcome to TwichBlade\n---------\nA place where you can connect to people\nand share your thoughts\n---------\n/).to_stdout
     end
 
+    it "displays page after user logs in" do
+      expect{ cli.user_page }.to output(/1. Logout/).to_stdout
+    end
+
     context "delegator" do
       it "calls signup on user when 1 is selcted" do
         input = "1"

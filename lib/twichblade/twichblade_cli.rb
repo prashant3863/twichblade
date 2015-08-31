@@ -7,9 +7,13 @@ module TwichBlade
     def index_page
       puts "1. Signup\n2. Login"
     end
-    
+
     def welcome_message
       puts "Welcome to TwichBlade\n---------\nA place where you can connect to people\nand share your thoughts\n---------\n\n"
+    end
+
+    def user_page
+      puts "1. Logout"
     end
 
     def option
