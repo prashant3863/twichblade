@@ -15,6 +15,14 @@ module TwichBlade
       else
         puts "Username not available"
       end
+
+      def login
+        result = @dbconnection.exec("select username from user_info where username = '#{@username}'")
+        available = true if result.ntuples == 0 
+        if available
+          puts "User not registered"
+        end
+      end
     end
   end
 end
