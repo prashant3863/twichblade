@@ -21,6 +21,10 @@ module TwichBlade
         it "should not let unregistered user login" do 
           expect{ user_2.login }.to output(/User not registered/).to_stdout
         end
+
+        it "should let registered user login" do 
+          expect{ user_1.login }.to output(/Login sucessfull/).to_stdout
+        end
       end
     end
   end

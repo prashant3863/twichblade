@@ -21,6 +21,8 @@ module TwichBlade
         available = true if result.ntuples == 0 
         if available
           puts "User not registered"
+        else
+          puts "Login sucessfull"
         end
       end
     end
