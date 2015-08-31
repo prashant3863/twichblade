@@ -18,12 +18,12 @@ module TwichBlade
     end
 
     def login
-      res = @dbconnection.exec("select username from user_info where username = '#{@username}'")
-      available = true if res.ntuples == 0 
-      if available
-        puts "User not registered"
+      res = @dbconnection.exec("select * from user_info where username = '#{@username}' and password = '#{@password}'")
+      registered = true if res.ntuples == 1 
+      if registered 
+        puts "Login sucessfull\n\n"
       else
-        puts "Login sucessfull"
+        puts "User not registered\n\n"
       end
     end
   end

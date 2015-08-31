@@ -9,7 +9,7 @@ module TwichBlade
     end
     
     def welcome_message
-      puts "Welcome to TwichBlade\n---------\nA place where you can connect to people\nand share your thoughts\n---------\n"
+      puts "Welcome to TwichBlade\n---------\nA place where you can connect to people\nand share your thoughts\n---------\n\n"
     end
 
     def option
@@ -27,6 +27,7 @@ module TwichBlade
     end
 
     def run
+      welcome_message
       while 1
         index_page
         o = option
