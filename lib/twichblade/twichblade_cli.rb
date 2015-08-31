@@ -24,7 +24,6 @@ module TwichBlade
 
     def run
       while 1
-        welcome_message
         index_page
         o = option
         delegate(o)
