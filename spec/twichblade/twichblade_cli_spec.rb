@@ -35,6 +35,12 @@ module TwichBlade
         allow(Kernel).to receive(:gets).and_return('prashant', 'foobar')
         expect{ cli.delegate(input) }.to output(/Incorrect Username or Password/).to_stdout
       end
+
+      it "invalid option message" do
+        input = "3"
+        allow(Kernel).to receive(:gets).and_return('prashant', 'foobar')
+        expect{ cli.delegate(input) }.to output(/Please enter a valid option/).to_stdout
+      end
     end
   end
 end

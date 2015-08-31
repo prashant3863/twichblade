@@ -27,6 +27,8 @@ module TwichBlade
       elsif option == "2"
         take_credentials
         User.new(@username, @password, @dbconnection).login
+      else
+        puts "Please enter a valid option"
       end
     end
 
