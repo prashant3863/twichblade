@@ -23,7 +23,7 @@ module TwichBlade
       if registered 
         puts "Login sucessfull\n\n"
       else
-        puts "User not registered\n\n"
+        puts "Incorrect Username or Password\n\n"
       end
     end
   end

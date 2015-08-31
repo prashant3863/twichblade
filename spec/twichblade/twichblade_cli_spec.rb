@@ -29,7 +29,7 @@ module TwichBlade
       it "calls login on user when 2 is selcted" do
         input = "2"
         allow(Kernel).to receive(:gets).and_return('prashant', 'foobar')
-        expect{ cli.delegate(input) }.to output(/User not registered/).to_stdout
+        expect{ cli.delegate(input) }.to output(/Incorrect Username or Password/).to_stdout
       end
     end
   end
