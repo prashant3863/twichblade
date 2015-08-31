@@ -21,6 +21,12 @@ module TwichBlade
         allow(Kernel).to receive(:gets).and_return('prashant', 'foobar')
         expect{ cli.delegate(input) }.to output(/Signup sucessfull/).to_stdout
       end
+
+      it "calls login on user when 2 is selcted" do
+        input = "2"
+        allow(Kernel).to receive(:gets).and_return('prashant', 'foobar')
+        expect{ cli.delegate(input) }.to output(/Login sucessfull/).to_stdout
+      end
     end
   end
 end

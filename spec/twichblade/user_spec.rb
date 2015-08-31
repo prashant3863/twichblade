@@ -16,15 +16,15 @@ module TwichBlade
       it "should not register a user for already existing username" do
         expect{ user_1.signup }.to output(/Username not available/).to_stdout
       end
+    end
 
-      context "login" do
-        it "should not let unregistered user login" do 
-          expect{ user_2.login }.to output(/User not registered/).to_stdout
-        end
+    context "login" do
+      it "should not let unregistered user login" do 
+        expect{ user_2.login }.to output(/User not registered/).to_stdout
+      end
 
-        it "should let registered user login" do 
-          expect{ user_1.login }.to output(/Login sucessfull/).to_stdout
-        end
+      it "should let registered user login" do 
+        expect{ user_1.login }.to output(/Login sucessfull/).to_stdout
       end
     end
   end

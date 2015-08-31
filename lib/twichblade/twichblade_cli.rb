@@ -16,11 +16,15 @@ module TwichBlade
       if option == "1"
         take_credentials
         User.new(@username, @password, @dbconnection).signup
+      elsif option == "2"
+        take_credentials
+        User.new(@username, @password, @dbconnection).login
       end
     end
 
     def run
       while 1
+        welcome_message
         index_page
         o = option
         delegate(o)
