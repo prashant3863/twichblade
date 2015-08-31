@@ -15,6 +15,10 @@ module TwichBlade
       expect(cli.option).to eq("1")
     end
 
+    it "displays welcome message" do
+      expect{ cli.welcome_message }.to output(/Welcome to TwichBlade\n---------\nA place where you can connect to people\nand share your thoughts\n---------\n/).to_stdout
+    end
+
     context "delegator" do
       it "calls signup on user when 1 is selcted" do
         input = "1"
@@ -25,7 +29,7 @@ module TwichBlade
       it "calls login on user when 2 is selcted" do
         input = "2"
         allow(Kernel).to receive(:gets).and_return('prashant', 'foobar')
-        expect{ cli.delegate(input) }.to output(/Login sucessfull/).to_stdout
+        expect{ cli.delegate(input) }.to output(/User not registered/).to_stdout
       end
     end
   end
