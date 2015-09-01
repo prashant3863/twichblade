@@ -24,6 +24,10 @@ module TwichBlade
         expect(user_2).not_to be_logged_in
       end
 
+      it "should print unsucessfull login message when login fails" do
+        expect{ user_2.login }.to output(/Incorrect Username or Password/).to_stdout
+      end
+
       it "should let registered user login" do
         user_1.login
         expect(user_1).to be_logged_in
