@@ -4,6 +4,7 @@ module TwichBlade
       @username = username
       @password = password
       @dbconnection = dbconnection
+      @flag = false
     end
 
     def signup
@@ -22,9 +23,14 @@ module TwichBlade
       registered = true if res.ntuples == 1 
       if registered 
         puts "Login sucessfull\n\n"
+        @flag = true
       else
         puts "Incorrect Username or Password\n\n"
       end
+    end
+
+    def logged_in?
+      @flag == true
     end
   end
 end

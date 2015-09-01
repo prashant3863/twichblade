@@ -16,7 +16,7 @@ module TwichBlade
     end
 
     it "displays welcome message" do
-      expect{ cli.welcome_message }.to output(/Welcome to TwichBlade\n---------\nA place where you can connect to people\nand share your thoughts\n---------\n/).to_stdout
+      expect{ cli.welcome_message }.to output(/Welcome to TwichBlade\n----------\nA place where you can connect to people\nand share your thoughts\n----------\n\n/).to_stdout
     end
 
     it "displays page after user logs in" do
