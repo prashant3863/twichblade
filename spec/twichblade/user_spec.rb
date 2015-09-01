@@ -19,8 +19,9 @@ module TwichBlade
     end
 
     context "login" do
-      it "should not let unregistered user login" do 
-        expect{ user_2.login }.to output(/Incorrect Username or Password/).to_stdout
+      it "should not let unregistered user login" do
+        user_2.login
+        expect(user_2).not_to be_logged_in
       end
 
       it "should let registered user login" do
