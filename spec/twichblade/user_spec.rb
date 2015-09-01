@@ -32,6 +32,10 @@ module TwichBlade
         user_1.login
         expect(user_1).to be_logged_in
       end
+
+      it "should print sucessfull login message when login" do
+        expect{ user_1.login }.to output(/Login sucessfull/).to_stdout
+      end
     end
   end
 end
