@@ -9,7 +9,7 @@ module TwichBlade
     end
 
     def welcome_message
-      puts "Welcome to TwichBlade\n---------\nA place where you can connect to people\nand share your thoughts\n---------\n\n"
+      puts "Welcome to TwichBlade\n----------\nA place where you can connect to people\nand share your thoughts\n----------\n\n"
     end
 
     def user_page
