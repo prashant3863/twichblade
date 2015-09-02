@@ -42,6 +42,16 @@ module TwichBlade
         expect{ cli.delegate(input) }.to output(/Please enter a valid option/).to_stdout
       end
     end
+
+    context "login delegate" do
+      before (:each) { @dbconnection.exec("insert into user_info (username, password) values ('prashant', 'foobar')")}
+      it "Logs out the user when logout option is selected" do
+        input = "1"
+        allow(Kernel).to receive(:gets).and_return('prashant', 'foobar')
+        cli.delegate("2")
+        expect{ cli.login_delegate(input) }.to output(/Logout Sucessfull/).to_stdout
+      end
+    end
   end
 end
 

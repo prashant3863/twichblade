@@ -1,9 +1,6 @@
 module TwichBlade
   class TwichBladeCli
 
-    MENU_ITEMS = ["Signup", "Login"]
-
-
     def initialize(dbconnection)
       @dbconnection = dbconnection
     end
@@ -25,16 +22,20 @@ module TwichBlade
     end
 
     def delegate(option)
+      take_credentials
+      @user = User.new(@username, @password, @dbconnection)
       if option == "1"
-        take_credentials
-        user = User.new(@username, @password, @dbconnection)
-        user.signup
+        @user.signup
       elsif option == "2"
-        take_credentials
-        user = User.new(@username, @password, @dbconnection)
-        user.login
+        @user.login
       else
         puts "Please enter a valid option"
+      end
+    end
+
+    def login_delegate(option)
+      if option == "1"
+        puts "Logout Sucessfull"
       end
     end
 
