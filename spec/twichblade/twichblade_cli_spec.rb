@@ -46,10 +46,11 @@ module TwichBlade
     context "login delegate" do
       before (:each) { @dbconnection.exec("insert into user_info (username, password) values ('prashant', 'foobar')")}
       it "Logs out the user when logout option is selected" do
-        input = "1"
-        allow(Kernel).to receive(:gets).and_return('prashant', 'foobar')
-        cli.delegate("2")
-        expect{ cli.login_delegate(input) }.to output(/Logout Sucessfull/).to_stdout
+        user_1 = User.new('prashant', 'foobar', @dbconnection)
+        allow(User).to receive(:new).and_return(user_1)
+        cli.delegate('2')
+        expect(user_1).to receive(:logout)
+        cli.login_delegate('1')
       end
     end
   end

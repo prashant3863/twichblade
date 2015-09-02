@@ -1,6 +1,6 @@
 module TwichBlade
   class TwichBladeCli
-
+    
     def initialize(dbconnection)
       @dbconnection = dbconnection
     end
@@ -35,7 +35,7 @@ module TwichBlade
 
     def login_delegate(option)
       if option == "1"
-        puts "Logout Sucessfull"
+        @user.logout
       end
     end
 
