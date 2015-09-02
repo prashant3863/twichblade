@@ -36,6 +36,10 @@ module TwichBlade
       @logged_in = false
     end
 
+    def tweet
+      puts "Tweet sucessfull"
+    end
+
     def logged_in?
       @logged_in == true
     end

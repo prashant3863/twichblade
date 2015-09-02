@@ -44,5 +44,11 @@ module TwichBlade
         expect(user_1).not_to be_logged_in
       end
     end
+
+    context "tweet" do
+      it "shuould let user publish a tweet" do
+        expect{ user_1.tweet }.to output(/Tweet sucessfull/).to_stdout
+      end
+    end
   end
 end
