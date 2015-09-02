@@ -1,10 +1,11 @@
 module TwichBlade
   class User
+    attr_reader :flag
     def initialize(username, password, dbconnection)
       @username = username
       @password = password
       @dbconnection = dbconnection
-      @flag = false
+      @logged_in = false
     end
 
     def signup
@@ -23,14 +24,15 @@ module TwichBlade
       registered = true if res.ntuples == 1 
       if registered 
         puts "Login sucessfull\n\n"
-        @flag = true
+        @logged_in = true
       else
         puts "Incorrect Username or Password\n\n"
+        @logged_in = false
       end
     end
 
     def logged_in?
-      @flag == true
+      @logged_in == true
     end
   end
 end
