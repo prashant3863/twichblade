@@ -31,6 +31,10 @@ module TwichBlade
       end
     end
 
+    def logout
+      @logged_in = false
+    end
+
     def logged_in?
       @logged_in == true
     end

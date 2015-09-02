@@ -37,5 +37,12 @@ module TwichBlade
         expect{ user_1.login }.to output(/Login sucessfull/).to_stdout
       end
     end
+
+    context "logout" do
+      it "should logout a user" do
+        user_1.logout
+        expect(user_1).not_to be_logged_in
+      end
+    end
   end
 end
