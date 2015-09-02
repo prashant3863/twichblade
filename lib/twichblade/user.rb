@@ -32,6 +32,7 @@ module TwichBlade
     end
 
     def logout
+      puts "Logout sucessfull"
       @logged_in = false
     end
 
