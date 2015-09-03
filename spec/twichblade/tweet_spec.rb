@@ -10,12 +10,10 @@ module TwichBlade
       @dbconnection.exec("delete from user_info")
     end
     let(:tweet) { Tweet.new("hello", "prashant") }
-    
-    context "publish" do
-      it  "saves content of the tweet for view" do
-        tweet.publish
-        expect(tweet).to be_published
-      end
+
+    it  "saves content of the tweet for view" do
+      tweet.publish
+      expect(tweet).to be_published
     end
   end
 end
