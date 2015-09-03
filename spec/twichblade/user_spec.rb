@@ -2,11 +2,11 @@ require "spec_helper"
 
 module TwichBlade
   describe "User" do
-    before(:all) {@dbconnection =  DatabaseConnection.new("twichblade_spec").connection}
+    before(:all) {@dbconnection =  DBConnection.connection}
     before (:each) { @dbconnection.exec("insert into user_info (username, password) values ('prashant', 'foobar')")}
     after (:each) { @dbconnection.exec("delete from user_info") }
-    let(:user_1) { User.new("prashant", "foobar", @dbconnection) }
-    let(:user_2) { User.new("prashant2", "foobar2", @dbconnection) }
+    let(:user_1) { User.new("prashant", "foobar") }
+    let(:user_2) { User.new("prashant2", "foobar2") }
 
     context "signup" do
       it "should register a user for available username" do

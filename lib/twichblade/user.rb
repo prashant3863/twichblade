@@ -1,10 +1,10 @@
 module TwichBlade
   class User
     attr_reader :flag
-    def initialize(username, password, dbconnection)
+    def initialize(username, password)
       @username = username
       @password = password
-      @dbconnection = dbconnection
+      @dbconnection = DBConnection.connection
       @logged_in = false
     end
 

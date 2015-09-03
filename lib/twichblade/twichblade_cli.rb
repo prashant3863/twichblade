@@ -23,7 +23,7 @@ module TwichBlade
 
     def delegate(option)
       take_credentials
-      @user = User.new(@username, @password, @dbconnection)
+      @user = User.new(@username, @password)
       if option == "1"
         @user.signup
       elsif option == "2"
