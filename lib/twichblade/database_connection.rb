@@ -7,4 +7,5 @@ module TwichBlade
       @connection
     end
   end
+  DBConnection = DatabaseConnection.new(ENV['dbname'])
 end

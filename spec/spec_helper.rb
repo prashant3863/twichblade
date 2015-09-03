@@ -5,3 +5,4 @@ Figaro.application = Figaro::Application.new(environment: "testing", path: "conf
 Figaro.load
 
 require "twichblade"
+

@@ -5,12 +5,13 @@ module TwichBlade
     before(:all) {@dbconnection =  DatabaseConnection.new("twichblade_spec").connection}
     before (:each) { @dbconnection.exec("insert into user_info (username, password) values ('prashant', 'foobar')")}
     after (:each) { @dbconnection.exec("delete from user_info") }
-    let(:user_1) {User.new("prashant", "foobar", @dbconnection)}
-    let(:user_2) {User.new("prashant2", "foobar2", @dbconnection)}
+    let(:user_1) { User.new("prashant", "foobar", @dbconnection) }
+    let(:user_2) { User.new("prashant2", "foobar2", @dbconnection) }
 
     context "signup" do
       it "should register a user for available username" do
-        expect{ user_2.signup }.to output(/Signup sucessfull/).to_stdout 
+        user_2.signup
+        expect(user_2). to be_signed_up
       end
 
       it "should not register a user for already existing username" do
@@ -42,12 +43,6 @@ module TwichBlade
       it "should logout a user" do
         user_1.logout
         expect(user_1).not_to be_logged_in
-      end
-    end
-
-    context "tweet" do
-      it "shuould let user publish a tweet" do
-        expect{ user_1.tweet }.to output(/Tweet sucessfull/).to_stdout
       end
     end
   end

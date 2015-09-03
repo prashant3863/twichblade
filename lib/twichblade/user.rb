@@ -36,12 +36,13 @@ module TwichBlade
       @logged_in = false
     end
 
-    def tweet
-      puts "Tweet sucessfull"
-    end
-
     def logged_in?
       @logged_in == true
+    end
+
+    def signed_up?
+      query = @dbconnection.exec("select username from user_info where username = '#{@username}'")
+      check = true if query.ntuples == 1
     end
   end
 end
