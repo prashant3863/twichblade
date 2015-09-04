@@ -6,7 +6,7 @@ module TwichBlade
     end
 
     def index_page
-      puts "1. Signup\n2. Login"
+      puts "1. Signup\n2. Login\n3. Exit"
     end
 
     def welcome_message
@@ -22,14 +22,18 @@ module TwichBlade
     end
 
     def delegate(option)
-      take_credentials
-      @user = User.new(@username, @password)
-      if option == "1"
-        @user.signup
-      elsif option == "2"
-        @user.login
+      if option == "3"
+        Process.exit
       else
-        puts "Please enter a valid option"
+        take_credentials
+        @user = User.new(@username, @password)
+        if option == "1"
+          @user.signup
+        elsif option == "2"
+          @user.login
+        else
+          puts "Please enter a valid option"
+        end
       end
     end
 

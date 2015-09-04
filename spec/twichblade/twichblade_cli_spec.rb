@@ -45,8 +45,13 @@ module TwichBlade
         cli.delegate(input)
       end
 
-      it "displays invalid option message" do
+      it "user exits the application when 3 is selcted" do
         input = "3"
+        expect{ cli.delegate(input) }.to raise_error(SystemExit)
+      end
+
+      it "displays invalid option message" do
+        input = "4"
         allow(Kernel).to receive(:gets).and_return('prashant', 'foobar')
         expect{ cli.delegate(input) }.to output(/Please enter a valid option/).to_stdout
       end
