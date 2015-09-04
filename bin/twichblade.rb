@@ -10,5 +10,5 @@ Figaro.load
 require "twichblade"
 
 dbconnection = TwichBlade::DatabaseConnection.new(ENV["dbname"])
-twichblade_cli = TwichBlade::TwichBladeCli.new(dbconnection.connection)
+twichblade_cli = TwichBlade::TwichBladeCli.new
 twichblade_cli.run
