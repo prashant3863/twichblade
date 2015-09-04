@@ -49,7 +49,7 @@ module TwichBlade
         index_page
         o = option
         delegate(o)
-        if @user.logged_in?
+        while @user.logged_in?
           user_page
           o = option
           login_delegate(o)
