@@ -20,5 +20,3 @@ module TwichBlade
     end
   end
 end
-
-#("insert into tweets values(DEFAULT, $1, $2, LOCALTIMESTAMP)",[user_id, tweet_message])
