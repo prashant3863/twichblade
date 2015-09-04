@@ -36,6 +36,10 @@ module TwichBlade
     def login_delegate(option)
       if option == "1"
         @user.logout
+      elsif option == "2"
+        content
+        @tweet = Tweet.new(@content, @username)
+        @tweet.publish
       end
     end
 
@@ -59,6 +63,11 @@ module TwichBlade
       @username = Kernel.gets.chomp
       print "password: "
       @password = Kernel.gets.chomp
+    end
+
+    def content
+      print "Compose your tweet: "
+      @content = Kernel.gets.chomp
     end
   end
 end

@@ -6,7 +6,10 @@ module TwichBlade
     let(:cli) { TwichBladeCli.new }
     let(:user) { User.new('prashant', 'foobar') }
     let(:tweet) { Tweet.new("Hello, There.", "prashant") }
-    after (:each) { @dbconnection.exec("delete from user_info") }
+    after (:each) do
+      @dbconnection.exec("delete from tweets")
+      @dbconnection.exec("delete from user_info")
+    end
 
     it "displays the index page" do
       expect{ cli.index_page }.to output(/1. Signup\n2. Login/).to_stdout
@@ -56,6 +59,14 @@ module TwichBlade
         cli.delegate('2')
         expect(user).to receive(:logout)
         cli.login_delegate('1')
+      end
+
+      it "user can tweet when tweet option is selected" do
+        allow(User).to receive(:new).and_return(user)
+        cli.delegate('2')
+        allow(Tweet).to receive(:new).and_return(tweet)
+        expect(tweet).to receive(:publish)
+        cli.login_delegate('2')
       end
     end
   end
