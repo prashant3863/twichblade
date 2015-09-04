@@ -14,7 +14,7 @@ module TwichBlade
     end
 
     def user_page
-      puts "1. Logout"
+      puts "1. Logout\n2. Tweet"
     end
 
     def option
