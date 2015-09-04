@@ -1,8 +1,8 @@
 module TwichBlade
   class TwichBladeCli
 
-    def initialize(dbconnection)
-      @dbconnection = dbconnection
+    def initialize
+      @dbconnection = DBConnection.connection
     end
 
     def index_page

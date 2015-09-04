@@ -3,9 +3,10 @@ require "spec_helper"
 module TwichBlade
   describe "TwichBladeCli" do
     before(:all) {@dbconnection =  DatabaseConnection.new("twichblade_spec").connection}
-    let(:cli) { TwichBladeCli.new(@dbconnection) }
+    let(:cli) { TwichBladeCli.new }
+    let(:user) { User.new('prashant', 'foobar') }
+    let(:tweet) { Tweet.new("Hello, There.", "prashant") }
     after (:each) { @dbconnection.exec("delete from user_info") }
-    let(:user) { User.new('prashant', 'foobar', @dbconnection) }
 
     it "displays the index page" do
       expect{ cli.index_page }.to output(/1. Signup\n2. Login/).to_stdout
