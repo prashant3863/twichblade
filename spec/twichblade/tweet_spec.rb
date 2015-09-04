@@ -10,7 +10,7 @@ module TwichBlade
       @dbconnection.exec("delete from user_info")
     end
     let(:tweet) { Tweet.new("hello", "prashant") }
-    let(:long_tweet) { Tweet.new("When I was a child I had a fever. My hands felt like two ballons. Now I have got that felling once again, I cant explain, you wont understand.", "prashant") }
+    let(:long_tweet) { Tweet.new("When I was a child I had a fever. My hands felt like two ballons. Now I've got that felling once again, I cant explain, you won't understand.", "prashant") }
 
     it  "saves content of the tweet for view" do
       tweet.publish
