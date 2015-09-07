@@ -45,7 +45,8 @@ module TwichBlade
         @tweet = Tweet.new(@content, @username)
         @tweet.publish
       elsif option == "3"
-        @user.timeline
+        @timeline = @user.timeline
+        timeline_print
       end
     end
 
@@ -75,5 +76,10 @@ module TwichBlade
       print "Compose your tweet: "
       @content = Kernel.gets.chomp
     end
+
+    def timeline_print
+      @timeline.each{ |x| puts "#{@username} => #{x}" }
+    end
+
   end
 end

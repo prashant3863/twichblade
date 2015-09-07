@@ -4,8 +4,8 @@ module TwichBlade
   describe "TwichBladeCli" do
     before(:all) {@dbconnection =  DatabaseConnection.new("twichblade_spec").connection}
     let(:cli) { TwichBladeCli.new }
-    let(:user) { User.new('prashant', 'foobar') }
     let(:tweet) { Tweet.new("Hello, There.", "prashant") }
+    let(:user) {  User.new("prashant", "foobar")}
     after (:each) do
       @dbconnection.exec("delete from tweets")
       @dbconnection.exec("delete from user_info")
@@ -59,6 +59,7 @@ module TwichBlade
 
     context "login delegate" do
       before (:each) { @dbconnection.exec("insert into user_info (username, password) values ('prashant', 'foobar')")}
+      
       it "logs out the user when logout option is selected" do
         allow(User).to receive(:new).and_return(user)
         cli.delegate('2')
@@ -75,9 +76,9 @@ module TwichBlade
       end
 
       it "user can see all his past tweets when timeline option is selected" do
-        allow(User).to receive(:new).and_return(user)
+        allow_any_instance_of(User).to receive(:timeline)
         cli.delegate('2')
-        expect(user).to receive(:timeline)
+        expect_any_instance_of(TwichBladeCli).to receive(:timeline_print)
         cli.login_delegate('3')
       end
     end
