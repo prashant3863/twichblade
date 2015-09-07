@@ -4,7 +4,9 @@ module TwichBlade
   describe "User" do
     before(:all) {@dbconnection =  DBConnection.connection}
     before (:each) { @dbconnection.exec("insert into user_info (username, password) values ('prashant', 'foobar')")}
-    after (:each) { @dbconnection.exec("delete from user_info") }
+    after (:each) { 
+      @dbconnection.exec("delete from tweets") 
+      @dbconnection.exec("delete from user_info") }
     let(:user_1) { User.new("prashant", "foobar") }
     let(:user_2) { User.new("prashant2", "foobar2") }
 
@@ -43,6 +45,14 @@ module TwichBlade
       it "should logout a user" do
         user_1.logout
         expect(user_1).not_to be_logged_in
+      end
+    end
+
+    context "timeline" do
+      it "should display the past tweets of the user" do
+        recent_tweets = [Tweet.new("hello", "prashant"), Tweet.new("hello, world", "prashant")]
+        recent_tweets.each { |x| x.publish }
+        expect(user_1.timeline).to include("hello", "hello, world")
       end
     end
   end
