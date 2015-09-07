@@ -45,7 +45,7 @@ module TwichBlade
         @tweet = Tweet.new(@content, @username)
         @tweet.publish
       elsif option == "3"
-        @timeline = @user.timeline
+        @timeline = Timeline.new(@username).create
         timeline_print
       end
     end

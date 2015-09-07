@@ -76,7 +76,7 @@ module TwichBlade
       end
 
       it "user can see all his past tweets when timeline option is selected" do
-        allow_any_instance_of(User).to receive(:timeline)
+        allow_any_instance_of(User).to receive(:new)
         cli.delegate('2')
         expect_any_instance_of(TwichBladeCli).to receive(:timeline_print)
         cli.login_delegate('3')

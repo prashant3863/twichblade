@@ -47,13 +47,5 @@ module TwichBlade
         expect(user_1).not_to be_logged_in
       end
     end
-
-    context "timeline" do
-      it "should display the past tweets of the user" do
-        recent_tweets = [Tweet.new("hello", "prashant"), Tweet.new("hello, world", "prashant")]
-        recent_tweets.each { |x| x.publish }
-        expect(user_1.timeline).to include("hello", "hello, world")
-      end
-    end
   end
 end
