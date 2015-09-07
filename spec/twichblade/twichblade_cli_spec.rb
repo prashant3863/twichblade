@@ -73,6 +73,13 @@ module TwichBlade
         expect(tweet).to receive(:publish)
         cli.login_delegate('2')
       end
+
+      it "user can see all his past tweets when timeline option is selected" do
+        allow(User).to receive(:new).and_return(user)
+        cli.delegate('2')
+        expect(user).to receive(:timeline)
+        cli.login_delegate('3')
+      end
     end
   end
 end

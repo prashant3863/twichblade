@@ -14,7 +14,7 @@ module TwichBlade
     end
 
     def user_page
-      puts "1. Logout\n2. Tweet"
+      puts "1. Logout\n2. Tweet\n3. Timeline"
     end
 
     def option
@@ -44,6 +44,8 @@ module TwichBlade
         content
         @tweet = Tweet.new(@content, @username)
         @tweet.publish
+      elsif option == "3"
+        @user.timeline
       end
     end
 
