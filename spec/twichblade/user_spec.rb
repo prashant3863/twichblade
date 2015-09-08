@@ -4,16 +4,17 @@ module TwichBlade
   describe "User" do
     before(:all) {@dbconnection =  DBConnection.connection}
     before (:each) { @dbconnection.exec("insert into user_info (username, password) values ('prashant', 'foobar')")}
-    after (:each) { 
+    after (:each) do
       @dbconnection.exec("delete from tweets") 
-      @dbconnection.exec("delete from user_info") }
+      @dbconnection.exec("delete from user_info")
+    end
     let(:user_1) { User.new("prashant", "foobar") }
     let(:user_2) { User.new("prashant2", "foobar2") }
 
     context "signup" do
       it "should register a user for available username" do
         user_2.signup
-        expect(user_2). to be_signed_up
+        expect(user_2).to be_signed_up
       end
 
       it "should not register a user for already existing username" do
