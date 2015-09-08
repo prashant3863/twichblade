@@ -14,7 +14,7 @@ module TwichBlade
     end
 
     def user_page
-      puts "1. Logout\n2. Tweet\n3. Timeline"
+      puts "1. Logout\n2. Tweet\n3. Timeline\n4. Search"
     end
 
     def option
@@ -47,6 +47,12 @@ module TwichBlade
       elsif option == "3"
         @timeline = Timeline.new(@username).create
         timeline_print
+      elsif option == "4"
+        search_user
+        if Search.new(@search_user).execute 
+          @timeline = Timeline.new(@search_user).create
+          search_timeline_print
+        end
       else
         puts "Please enter a valid option"
       end
@@ -83,5 +89,13 @@ module TwichBlade
       @timeline.each{ |x| puts "#{@username} => #{x}" }
     end
 
+    def search_timeline_print
+      @timeline.each{ |x| puts "#{@search_user} => #{x}"}
+    end
+
+    def search_user
+      print "username: "
+      @search_user = Kernel.gets.chomp
+    end
   end
 end

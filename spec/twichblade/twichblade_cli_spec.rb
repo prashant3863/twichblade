@@ -6,6 +6,7 @@ module TwichBlade
     let(:cli) { TwichBladeCli.new }
     let(:tweet) { Tweet.new("Hello, There.", "prashant") }
     let(:user) {  User.new("prashant", "foobar")}
+    let(:search) { Search.new("prashant") }
     after (:each) do
       @dbconnection.exec("delete from tweets")
       @dbconnection.exec("delete from user_info")
@@ -81,8 +82,14 @@ module TwichBlade
         expect_any_instance_of(TwichBladeCli).to receive(:timeline_print)
         cli.login_delegate('3')
       end
+
+      it "user can see the timeline of the searched user" do
+        allow_any_instance_of(User).to receive(:new)
+        cli.delegate('2')
+        allow_any_instance_of(Search).to receive(:execute).and_return(true)
+        expect_any_instance_of(TwichBladeCli).to receive(:search_timeline_print)
+        cli.login_delegate('4')
+      end
     end
   end
 end
-
-
