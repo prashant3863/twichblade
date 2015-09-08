@@ -47,6 +47,8 @@ module TwichBlade
       elsif option == "3"
         @timeline = Timeline.new(@username).create
         timeline_print
+      else
+        puts "Please enter a valid option"
       end
     end
 

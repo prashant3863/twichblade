@@ -1,7 +1,7 @@
 module TwichBlade
   class Timeline
     def initialize(username)
-      @username =username
+      @username = username
       @dbconnection = DBConnection.connection
     end
 
