@@ -9,6 +9,8 @@ module TwichBlade
       query = @dbconnection.exec("select * from user_info where username = '#{@username}'")
       if query.ntuples == 1
         true
+      else
+        false
       end
     end
   end

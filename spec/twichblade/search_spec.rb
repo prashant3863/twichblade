@@ -11,5 +11,11 @@ module TwichBlade
       search = Search.new(username)
       expect(search.execute).to eq(true)
     end
+
+    it "should not find user if user doesnot exist" do
+      username = "pro"
+      search = Search.new(username)
+      expect(search.execute).to eq(false)
+    end
   end
 end
