@@ -52,6 +52,8 @@ module TwichBlade
         if Search.new(@search_user).execute 
           @timeline = Timeline.new(@search_user).create
           search_timeline_print
+        else
+          puts "User Does not Exist"
         end
       else
         puts "Please enter a valid option"

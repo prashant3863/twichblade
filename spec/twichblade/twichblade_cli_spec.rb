@@ -83,12 +83,19 @@ module TwichBlade
         cli.login_delegate('3')
       end
 
-      it "user can see the timeline of the searched user" do
+      it "shows timeline of the searched user if the searched user exist" do
         allow_any_instance_of(User).to receive(:new)
         cli.delegate('2')
         allow_any_instance_of(Search).to receive(:execute).and_return(true)
         expect_any_instance_of(TwichBladeCli).to receive(:search_timeline_print)
         cli.login_delegate('4')
+      end
+
+      it "shows timeline of the searched user if the searched user doesnot exist" do
+        allow_any_instance_of(User).to receive(:new)
+        cli.delegate('2')
+        allow_any_instance_of(Search).to receive(:execute).and_return(false)
+        expect{ cli.login_delegate('4') }.to output(/User Does not Exist/).to_stdout
       end
     end
   end
