@@ -88,11 +88,11 @@ module TwichBlade
     end
 
     def timeline_print
-      @timeline.each{ |x| puts "#{@username} => #{x}" }
+      @timeline.each{ |x| puts "tweet_id:#{x['id']} | #{@username} => #{x['content']}" }
     end
 
     def search_timeline_print
-      @timeline.each{ |x| puts "#{@search_user} => #{x}"}
+      @timeline.each{ |x| puts "tweet_id:#{x['id']} | #{@search_user} => #{x['content']}"}
     end
 
     def search_user

@@ -13,7 +13,7 @@ module TwichBlade
       recent_tweets = [Tweet.new("hello", "prashant"), Tweet.new("hello, world", "prashant")]
       recent_tweets.each { |x| x.publish }
       timeline = Timeline.new("prashant")
-      expect(timeline.create).to include("hello", "hello, world")
+      expect(timeline.create.ntuples).to eq(2)
     end
   end
 end
