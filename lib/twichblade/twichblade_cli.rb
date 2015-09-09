@@ -42,7 +42,7 @@ module TwichBlade
         @user.logout
       elsif option == "2"
         content
-        @tweet = Tweet.new(@content, @username)
+        @tweet = Tweet.new(@content, @username, @username)
         @tweet.publish
       elsif option == "3"
         @timeline = Timeline.new(@username).create

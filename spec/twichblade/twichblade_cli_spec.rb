@@ -4,7 +4,7 @@ module TwichBlade
   describe "TwichBladeCli" do
     before(:all) {@dbconnection =  DatabaseConnection.new("twichblade_spec").connection}
     let(:cli) { TwichBladeCli.new }
-    let(:tweet) { Tweet.new("Hello, There.", "prashant") }
+    let(:tweet) { Tweet.new("Hello, There.", "prashant", "prashant") }
     let(:user) {  User.new("prashant", "foobar")}
     let(:search) { Search.new("prashant") }
     after (:each) do
