@@ -7,8 +7,9 @@ module TwichBlade
       @dbconncetion = DBConnection.connection
     end
 
-    def uid
-      @uid = @dbconncetion.exec("select user_id from tweets where id = #{@tweet_id}").field_values('user_id')[0].to_i
+    def tweet_owner
+      uid = @dbconncetion.exec("select user_id from tweets where id = #{@tweet_id}").field_values('user_id')[0].to_i
+      @tweet_owner = @dbconncetion.exec("select username from user_info where id = #{uid}").field_values('username')[0].to_s
     end
   end
 end

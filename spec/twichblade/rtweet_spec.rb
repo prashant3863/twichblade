@@ -19,16 +19,11 @@ module TwichBlade
       @dbconnection.exec("select id from tweets where content = 'hello'").field_values('id')[0].to_i
     end
 
-    def get_user_id
-      @dbconnection.exec("select id from user_info where username = 'prashant'").field_values('id')[0].to_i
-    end
-
-    it "finds user id based on the provided tweet id" do
+    it "finds tweet owner based on the provided tweet id" do
       username = "prashant"
       t_id = get_tweet_id
       retweet = Retweet.new(t_id, username)
-      id = get_user_id
-      expect(retweet.uid).to eq(id)
+      expect(retweet.tweet_owner).to eq("prashant")
     end
   end
 end
