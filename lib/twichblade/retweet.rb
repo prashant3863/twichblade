@@ -15,5 +15,10 @@ module TwichBlade
     def retweet_content
       @retweet_content = @dbconncetion.exec("select content from tweets where id = #{@tweet_id}").field_values('content')[0].to_s
     end
+
+    def execute
+      tweet = Tweet.new(@retweet_content, @username, @tweet_owner)
+      tweet.publish
+    end
   end
 end

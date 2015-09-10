@@ -32,6 +32,15 @@ module TwichBlade
       retweet = Retweet.new(t_id, username)
       expect(retweet.retweet_content).to eq("hello")
     end
+
+    it "publish retweet the tweet whose tweet id is given" do
+      username = "prashant"
+      t_id = get_tweet_id
+      retweet = Retweet.new(t_id, username)
+      retweet.tweet_owner
+      retweet.retweet_content
+      expect(retweet.execute).to eq(true)
+    end
   end
 end
 
