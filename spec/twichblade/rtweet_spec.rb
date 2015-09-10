@@ -25,6 +25,13 @@ module TwichBlade
       retweet = Retweet.new(t_id, username)
       expect(retweet.tweet_owner).to eq("prashant")
     end
+
+    it "finds tweet content based on the provided tweet id" do
+      username = "prashant"
+      t_id = get_tweet_id
+      retweet = Retweet.new(t_id, username)
+      expect(retweet.retweet_content).to eq("hello")
+    end
   end
 end
 
