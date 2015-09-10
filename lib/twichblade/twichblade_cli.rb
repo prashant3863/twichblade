@@ -55,7 +55,6 @@ module TwichBlade
         else
           puts "\nUser Does not Exist\n\n"
         end
-        puts "Please enter a valid option"
       end
     end
 
