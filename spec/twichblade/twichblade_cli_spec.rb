@@ -5,7 +5,8 @@ module TwichBlade
     before(:all) {@dbconnection =  DatabaseConnection.new("twichblade_spec").connection}
     let(:cli) { TwichBladeCli.new }
     let(:tweet) { Tweet.new("Hello, There.", "prashant", "prashant") }
-    let(:user) {  User.new("prashant", "foobar")}
+    let(:tweet_1) { Tweet.new("Hello", "prashant", "prashant") }
+    let(:user) {  User.new("prashant", "foobar") }
     let(:search) { Search.new("prashant") }
     after (:each) do
       @dbconnection.exec("delete from tweets")
@@ -13,7 +14,7 @@ module TwichBlade
     end
 
     it "displays the index page" do
-      expect{ cli.index_page }.to output(/1. Signup\n2. Login/).to_stdout
+      expect{ cli.index_page }.to output(/1. Signup\n2. Login\n3. Exit/).to_stdout
     end
 
     it "takes the desired option" do
@@ -91,7 +92,7 @@ module TwichBlade
         cli.login_delegate('4')
       end
 
-      it "shows timeline of the searched user if the searched user doesnot exist" do
+      it "shows error message if the searched user doesnot exist" do
         allow_any_instance_of(User).to receive(:new)
         cli.delegate('2')
         allow_any_instance_of(Search).to receive(:execute).and_return(false)

@@ -10,7 +10,7 @@ module TwichBlade
     end
 
     it "should display the past tweets of the user" do
-      recent_tweets = [Tweet.new("hello", "prashant"), Tweet.new("hello, world", "prashant")]
+      recent_tweets = [Tweet.new("hello", "prashant", "prashant"), Tweet.new("hello, world", "prashant", "prashant")]
       recent_tweets.each { |x| x.publish }
       timeline = Timeline.new("prashant")
       expect(timeline.create.ntuples).to eq(2)

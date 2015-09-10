@@ -55,7 +55,6 @@ module TwichBlade
         else
           puts "\nUser Does not Exist\n\n"
         end
-      else
         puts "Please enter a valid option"
       end
     end
@@ -88,11 +87,11 @@ module TwichBlade
     end
 
     def timeline_print
-      @timeline.each{ |x| puts "tweet_id:#{x['id']} | #{@username} => #{x['content']}" }
+      @timeline.each{ |x| puts "tweet_id:#{x['id']} | #{x['tweeted_by']} => #{x['content']}" }
     end
 
     def search_timeline_print
-      @timeline.each{ |x| puts "tweet_id:#{x['id']} | #{@search_user} => #{x['content']}"}
+      @timeline.each{ |x| puts "tweet_id:#{x['id']} | #{x['tweeted_by']} => #{x['content']}"}
     end
 
     def search_user
