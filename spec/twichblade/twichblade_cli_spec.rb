@@ -3,15 +3,15 @@ require "spec_helper"
 module TwichBlade
   describe "TwichBladeCli" do
     before(:all) {@dbconnection =  DatabaseConnection.new("twichblade_spec").connection}
+    after (:each) do
+      @dbconnection.exec("delete from tweets")
+      @dbconnection.exec("delete from user_info")
+    end
     let(:cli) { TwichBladeCli.new }
     let(:tweet) { Tweet.new("Hello, There.", "prashant", "prashant") }
     let(:tweet_1) { Tweet.new("Hello", "prashant", "prashant") }
     let(:user) {  User.new("prashant", "foobar") }
     let(:search) { Search.new("prashant") }
-    after (:each) do
-      @dbconnection.exec("delete from tweets")
-      @dbconnection.exec("delete from user_info")
-    end
 
     it "displays the index page" do
       expect{ cli.index_page }.to output(/1. Signup\n2. Login\n3. Exit/).to_stdout
@@ -97,6 +97,24 @@ module TwichBlade
         cli.delegate('2')
         allow_any_instance_of(Search).to receive(:execute).and_return(false)
         expect{ cli.login_delegate('4') }.to output(/User Does not Exist/).to_stdout
+      end
+
+      context "Retweet" do 
+        before(:each) do 
+          @dbconnection.exec("insert into user_info (username, password) values ('prashant', 'foobar')")
+          tweet.publish
+          @t_id = @dbconnection.exec("select id from tweets where content = 'Hello, There.'").field_values('id')[0].to_i
+        end
+
+        let(:retweet) { Retweet.new(@t_id,"prashant") }
+
+        it "retweet the tweet with given tweet id when 'retweet' option is selected" do
+          allow(User).to receive(:new).and_return(user)
+          cli.delegate('2')
+          allow(Retweet).to receive(:new).and_return(retweet)
+          expect(retweet).to receive(:publish)
+          cli.login_delegate('5')
+        end
       end
     end
   end

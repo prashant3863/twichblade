@@ -14,7 +14,7 @@ module TwichBlade
     end
 
     def user_page
-      puts "1. Logout\n2. Tweet\n3. Timeline\n4. Search"
+      puts "1. Logout\n2. Tweet\n3. Timeline\n4. Search\n5. Retweet"
     end
 
     def option
@@ -55,6 +55,10 @@ module TwichBlade
         else
           puts "\nUser Does not Exist\n\n"
         end
+      elsif option == "5"
+        tweet_id
+        @retweet = Retweet.new(@tweet_id, @username)
+        @retweet.publish
       end
     end
 
@@ -96,6 +100,11 @@ module TwichBlade
     def search_user
       print "username: "
       @search_user = Kernel.gets.chomp
+    end
+
+    def tweet_id
+      print "Enter the tweet id you want to retweet: "
+      @tweet_id = Kernel.gets.chomp
     end
   end
 end
