@@ -12,12 +12,14 @@ module TwichBlade
       if user_exists?
         follow = @dbconnection.exec("insert into follow values(DEFAULT, $1, $2)", [@follower_id, @following_id])
         true
+      else
+        false
       end
     end
 
     private
     def user_exists?
-      Search.new(@following)
+      Search.new(@following).execute
     end
   end
 end

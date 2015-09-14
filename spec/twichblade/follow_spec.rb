@@ -19,6 +19,13 @@ module TwichBlade
       follow = Follow.new(follower, following)
       expect(follow.do).to eq(true)
     end
+
+    it "do not follow user that is not registered" do
+      follower = "prashant"
+      following = "random"
+      follow = Follow.new(follower, following)
+      expect(follow.do).to eq(false)
+    end
   end
 end
 
