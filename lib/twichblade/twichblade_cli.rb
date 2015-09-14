@@ -14,7 +14,7 @@ module TwichBlade
     end
 
     def user_page
-      puts "1. Logout\n2. Tweet\n3. Timeline\n4. Search\n5. Retweet"
+      puts "1. Logout\n2. Tweet\n3. Timeline\n4. Search\n5. Retweet\n6. Follow"
     end
 
     def option
@@ -59,6 +59,10 @@ module TwichBlade
         tweet_id
         @retweet = Retweet.new(@tweet_id, @username)
         @retweet.publish
+      elsif option = "6"
+        user_to_follow
+        @follow = Follow.new(@username, @user_to_follow)
+        @follow.do
       end
     end
 
@@ -87,7 +91,7 @@ module TwichBlade
     def content
       print "Compose your tweet: "
       @content = Kernel.gets.chomp
-    end
+    end 
 
     def timeline_print
       @timeline.each{ |x| puts "tweet_id:#{x['id']} | #{x['tweeted_by']} => #{x['content']}" }
@@ -105,6 +109,11 @@ module TwichBlade
     def tweet_id
       print "Enter the tweet id you want to retweet: "
       @tweet_id = Kernel.gets.chomp
+    end
+
+    def user_to_follow
+      print "username of the person you want to follow: "
+      @user_to_follow = Kernel.gets.chomp
     end
   end
 end

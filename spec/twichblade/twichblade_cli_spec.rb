@@ -116,6 +116,16 @@ module TwichBlade
           cli.login_delegate('5')
         end
       end
+
+      let(:follow) { Follow.new("prashant", "random") }
+      
+      it "user can follow other users" do
+        allow(User).to receive(:new).and_return(user)
+        cli.delegate('2')
+        allow(Follow).to receive(:new).and_return(follow)
+        expect(follow).to receive(:do)
+        cli.login_delegate('6')
+      end
     end
   end
 end
