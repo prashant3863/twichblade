@@ -26,6 +26,6 @@ module TwichBlade
       follow = Follow.new(follower, following)
       expect(follow.do).to eq(false)
     end
-  end
+  end 
 end
 
