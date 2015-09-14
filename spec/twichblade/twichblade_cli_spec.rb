@@ -2,7 +2,7 @@ require "spec_helper"
 
 module TwichBlade
   describe "TwichBladeCli" do
-    before(:all) {@dbconnection =  DatabaseConnection.new("twichblade_spec").connection}
+    before(:all) { @dbconnection =  DatabaseConnection.new("twichblade_spec").connection }
     after (:each) do
       @dbconnection.exec("delete from tweets")
       @dbconnection.exec("delete from user_info")
@@ -60,9 +60,10 @@ module TwichBlade
     end
 
     context "login delegate" do
-      before (:each) { @dbconnection.exec("insert into user_info (username, password) values ('prashant', 'foobar')")}
+      before(:each) { @dbconnection.exec("insert into user_info (username, password) values ('prashant', 'foobar')")}
       
       it "logs out the user when logout option is selected" do
+        allow(Kernel).to receive(:gets).and_return('prashant', 'foobar')
         allow(User).to receive(:new).and_return(user)
         cli.delegate('2')
         expect(user).to receive(:logout)
@@ -70,31 +71,26 @@ module TwichBlade
       end
 
       it "user can tweet when tweet option is selected" do
-        allow(User).to receive(:new).and_return(user)
-        cli.delegate('2')
+        allow(Kernel).to receive(:gets).and_return("abcd tweet")
         allow(Tweet).to receive(:new).and_return(tweet)
         expect(tweet).to receive(:publish)
         cli.login_delegate('2')
       end
 
       it "user can see all his past tweets when timeline option is selected" do
-        allow_any_instance_of(User).to receive(:new)
-        cli.delegate('2')
         expect_any_instance_of(TwichBladeCli).to receive(:timeline_print)
         cli.login_delegate('3')
       end
 
       it "shows timeline of the searched user if the searched user exist" do
-        allow_any_instance_of(User).to receive(:new)
-        cli.delegate('2')
+        allow(Kernel).to receive(:gets).and_return("abcd user")
         allow_any_instance_of(Search).to receive(:execute).and_return(true)
         expect_any_instance_of(TwichBladeCli).to receive(:search_timeline_print)
         cli.login_delegate('4')
       end
 
       it "shows error message if the searched user doesnot exist" do
-        allow_any_instance_of(User).to receive(:new)
-        cli.delegate('2')
+        allow(Kernel).to receive(:gets).and_return("abcd user")
         allow_any_instance_of(Search).to receive(:execute).and_return(false)
         expect{ cli.login_delegate('4') }.to output(/User Does not Exist/).to_stdout
       end
@@ -109,8 +105,7 @@ module TwichBlade
         let(:retweet) { Retweet.new(@t_id,"prashant") }
 
         it "retweet the tweet with given tweet id when 'retweet' option is selected" do
-          allow(User).to receive(:new).and_return(user)
-          cli.delegate('2')
+          allow(Kernel).to receive(:gets).and_return("1")
           allow(Retweet).to receive(:new).and_return(retweet)
           expect(retweet).to receive(:publish)
           cli.login_delegate('5')
@@ -118,10 +113,9 @@ module TwichBlade
       end
 
       let(:follow) { Follow.new("prashant", "random") }
-      
+
       it "user can follow other users" do
-        allow(User).to receive(:new).and_return(user)
-        cli.delegate('2')
+        allow(Kernel).to receive(:gets).and_return("abcd user")
         allow(Follow).to receive(:new).and_return(follow)
         expect(follow).to receive(:do)
         cli.login_delegate('6')
