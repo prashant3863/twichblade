@@ -1,6 +1,6 @@
 module TwichBlade
   class User
-    attr_reader :flag
+
     def initialize(username, password)
       @username = username
       @password = password
