@@ -26,6 +26,15 @@ module TwichBlade
       follow = Follow.new(follower, following)
       expect(follow.do).to eq(false)
     end
+
+    context "refollow" do
+      before(:each) { @dbconnection.exec("insert into follow (follower, following) values ('prashant', 'pro')") }
+
+      it "should not follow already followed users" do
+        follow = Follow.new("prashant", "pro")
+        expect(follow.do).to eq(false)
+      end
+    end
   end 
 end
 
