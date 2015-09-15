@@ -59,7 +59,7 @@ module TwichBlade
         tweet_id
         @retweet = Retweet.new(@tweet_id, @username)
         @retweet.publish
-      elsif option = "6"
+      elsif option == "6"
         user_to_follow
         @follow = Follow.new(@username, @user_to_follow)
         @follow.do
