@@ -14,7 +14,7 @@ module TwichBlade
     end
 
     def user_page
-      puts "1. Logout\n2. Tweet\n3. Timeline\n4. Search\n5. Retweet\n6. Follow"
+      puts "1. Logout\n2. Tweet\n3. Timeline\n4. Search\n5. Retweet\n6. Follow\n7. Wall"
     end
 
     def option
@@ -63,6 +63,9 @@ module TwichBlade
         user_to_follow
         @follow = Follow.new(@username, @user_to_follow)
         @follow.do
+      elsif option == "7"
+        @wall = Wall.new(@username).create
+        wall_print
       end
     end
 
@@ -110,10 +113,14 @@ module TwichBlade
       print "Enter the tweet id you want to retweet: "
       @tweet_id = Kernel.gets.chomp
     end
-
+    
     def user_to_follow
       print "username of the person you want to follow: "
       @user_to_follow = Kernel.gets.chomp
+    end
+
+    def wall_print
+      @wall.each{ |y| y.each{ |x| puts "tweet_id:#{x['id']} | #{x['tweeted_by']} => #{x['content']}" } }
     end
   end
 end

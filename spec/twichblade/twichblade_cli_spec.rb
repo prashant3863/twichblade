@@ -120,6 +120,11 @@ module TwichBlade
         expect(follow).to receive(:do)
         cli.login_delegate('6')
       end
+
+      it "user can see all the tweets from users he is following when wall option is selected" do
+        expect_any_instance_of(TwichBladeCli).to receive(:wall_print)
+        cli.login_delegate('7')
+      end
     end
   end
 end
