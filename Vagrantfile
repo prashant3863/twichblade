@@ -1,4 +1,4 @@
-# -*- mode: ruby -*-
+#-*- mode: ruby -*-
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
@@ -46,20 +46,15 @@ Vagrant.configure(2) do |config|
       db.vm.network :private_network, ip: "10.1.1.33"
       db.vm.hostname = "db"
       db.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+      db.vm.synced_folder "./", "/home/vagrant/app"
 
       db.vm.provision "shell", privileged: false, inline: <<-SHELL
          echo "Installing Postgresql"
          sudo apt-get install -y postgresql postgresql-client postgresql-contrib libpq-dev
-         sudo -u postgres psql -c "create user vagrant with superuser;"
-         sudo -u postgres psql -c "alter user vagrant with login;"
-         sudo -u postgres psql -c "alter user vagrant with createdb;"
-         sudo -u postgres psql -c "create database vagrant;"
-         sudo -u vagrant psql -c "create database twichblade_staging;"
-         sudo -u vagrant psql -c "create database twichblade_spec;"
+         sudo -u postgres psql -f /home/vagrant/app/db_provision.sql
          echo "Setting up listen addresses"
-
          echo "listen_addresses = '*'" | sudo tee -a /etc/postgresql/9.3/main/postgresql.conf
-         echo "host    all    all    10.1.1.22/32  trust" | sudo tee -a /etc/postgresql/9.3/main/pg_hba.conf
+         echo "host    all    all    10.1.1.1/24 password" | sudo tee -a /etc/postgresql/9.3/main/pg_hba.conf
          sudo service postgresql restart
       SHELL
    end

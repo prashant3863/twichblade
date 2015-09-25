@@ -4,5 +4,5 @@
 /config/application.yml
 
 .vagrant
-
+/coverage
 **/laundrylist.rb

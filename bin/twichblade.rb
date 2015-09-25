@@ -9,6 +9,6 @@ Figaro.load
 
 require "twichblade"
 
-dbconnection = TwichBlade::DatabaseConnection.new(ENV["dbname"], ENV["host"], ENV["dbuser"])
+dbconnection = TwichBlade::DatabaseConnection.new(ENV["dbname"], ENV["host"], ENV["dbuser"], ENV["password"])
 twichblade_cli = TwichBlade::TwichBladeCli.new
 twichblade_cli.run
