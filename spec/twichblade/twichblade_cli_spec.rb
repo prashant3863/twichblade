@@ -2,7 +2,7 @@ require "spec_helper"
 
 module TwichBlade
   describe "TwichBladeCli" do
-    before(:all) { @dbconnection =  DatabaseConnection.new("twichblade_spec").connection }
+    before(:all) { @dbconnection = DBConnection.connection }
     after (:each) do
       @dbconnection.exec("delete from tweets")
       @dbconnection.exec("delete from user_info")
@@ -18,7 +18,7 @@ module TwichBlade
     end
 
     it "takes the desired option" do
-      allow(Kernel).to receive(:gets).and_return("1")
+      allow(STDIN).to receive(:gets).and_return("1")
       expect(cli.option).to eq("1")
     end
 
@@ -33,7 +33,8 @@ module TwichBlade
     context "delegator" do
       it "calls signup on user when 1 is selcted" do
         input = "1"
-        allow(Kernel).to receive(:gets).and_return('prashant', 'foobar')
+        allow(STDIN).to receive(:gets).and_return('prashant')
+        allow(STDIN).to receive(:noecho).and_return('foobar')
         allow(User).to receive(:new).and_return(user)
         expect(user).to receive(:signup)
         cli.delegate(input)
@@ -41,7 +42,8 @@ module TwichBlade
 
       it "calls login on user when 2 is selcted" do
         input = "2"
-        allow(Kernel).to receive(:gets).and_return('prashant', 'foobar')
+        allow(STDIN).to receive(:gets).and_return('prashant')
+        allow(STDIN).to receive(:noecho).and_return('foobar')
         allow(User).to receive(:new).and_return(user)
         expect(user).to receive(:login)
         cli.delegate(input)
@@ -54,7 +56,8 @@ module TwichBlade
 
       it "displays invalid option message" do
         input = "4"
-        allow(Kernel).to receive(:gets).and_return('prashant', 'foobar')
+        allow(STDIN).to receive(:gets).and_return('prashant')
+        allow(STDIN).to receive(:noecho).and_return('foobar')
         expect{ cli.delegate(input) }.to output(/Please enter a valid option/).to_stdout
       end
     end
@@ -63,7 +66,8 @@ module TwichBlade
       before(:each) { @dbconnection.exec("insert into user_info (username, password) values ('prashant', 'foobar')")}
       
       it "logs out the user when logout option is selected" do
-        allow(Kernel).to receive(:gets).and_return('prashant', 'foobar')
+        allow(STDIN).to receive(:gets).and_return('prashant')
+        allow(STDIN).to receive(:noecho).and_return('foobar')
         allow(User).to receive(:new).and_return(user)
         cli.delegate('2')
         expect(user).to receive(:logout)
@@ -71,7 +75,7 @@ module TwichBlade
       end
 
       it "user can tweet when tweet option is selected" do
-        allow(Kernel).to receive(:gets).and_return("abcd tweet")
+        allow(STDIN).to receive(:gets).and_return("abcd tweet")
         allow(Tweet).to receive(:new).and_return(tweet)
         expect(tweet).to receive(:publish)
         cli.login_delegate('2')
@@ -83,14 +87,14 @@ module TwichBlade
       end
 
       it "shows timeline of the searched user if the searched user exist" do
-        allow(Kernel).to receive(:gets).and_return("abcd user")
+        allow(STDIN).to receive(:gets).and_return("abcd user")
         allow_any_instance_of(Search).to receive(:execute).and_return(true)
         expect_any_instance_of(TwichBladeCli).to receive(:search_timeline_print)
         cli.login_delegate('4')
       end
 
       it "shows error message if the searched user doesnot exist" do
-        allow(Kernel).to receive(:gets).and_return("abcd user")
+        allow(STDIN).to receive(:gets).and_return("abcd user")
         allow_any_instance_of(Search).to receive(:execute).and_return(false)
         expect{ cli.login_delegate('4') }.to output(/User Does not Exist/).to_stdout
       end
@@ -105,7 +109,7 @@ module TwichBlade
         let(:retweet) { Retweet.new(@t_id,"prashant") }
 
         it "retweet the tweet with given tweet id when 'retweet' option is selected" do
-          allow(Kernel).to receive(:gets).and_return("1")
+          allow(STDIN).to receive(:gets).and_return("1")
           allow(Retweet).to receive(:new).and_return(retweet)
           expect(retweet).to receive(:publish)
           cli.login_delegate('5')
@@ -115,7 +119,7 @@ module TwichBlade
       let(:follow) { Follow.new("prashant", "random") }
 
       it "user can follow other users" do
-        allow(Kernel).to receive(:gets).and_return("abcd user")
+        allow(STDIN).to receive(:gets).and_return("abcd user")
         allow(Follow).to receive(:new).and_return(follow)
         expect(follow).to receive(:do)
         cli.login_delegate('6')

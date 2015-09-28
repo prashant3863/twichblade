@@ -18,7 +18,7 @@ module TwichBlade
     end
 
     def option
-      @option = Kernel.gets.chomp
+      @option = STDIN.gets.chomp
     end
 
     def delegate(option)
@@ -85,15 +85,16 @@ module TwichBlade
 
     private 
     def take_credentials
-      print "username: "
-      @username = Kernel.gets.chomp
-      print "password: "
-      @password = Kernel.gets.chomp
+      print "Enter your username: "
+      @username = STDIN.gets.chomp
+      print "Enter your password: "
+      @password = STDIN.noecho(&:gets).chomp
+      puts " "
     end
 
     def content
       print "Compose your tweet: "
-      @content = Kernel.gets.chomp
+      @content = STDIN.gets.chomp
     end 
 
     def timeline_print
@@ -106,17 +107,17 @@ module TwichBlade
 
     def search_user
       print "username: "
-      @search_user = Kernel.gets.chomp
+      @search_user = STDIN.gets.chomp
     end
 
     def tweet_id
       print "Enter the tweet id you want to retweet: "
-      @tweet_id = Kernel.gets.chomp
+      @tweet_id = STDIN.gets.chomp
     end
     
     def user_to_follow
       print "username of the person you want to follow: "
-      @user_to_follow = Kernel.gets.chomp
+      @user_to_follow = STDIN.gets.chomp
     end
 
     def wall_print
